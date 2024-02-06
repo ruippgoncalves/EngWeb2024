@@ -2,19 +2,19 @@
 
 <doc>
     <meta>
-        <title>Document Title</title>
-        <date>2013-01-01</date>
+        <title>Mapa das Ruas de Braga</title>
+        <date>2024-02-06</date>
         <author>
-            <id>1</id>
-            <nome>John Doe</nome>
+            <id>A101759</id>
+            <nome>Rui Gonçalves</nome>
         </author>
         <uc>
-            <sigla>UC1</sigla>
-            <nome>Use Case 1</nome>
+            <sigla>EW</sigla>
+            <nome>Engenharia Web</nome>
         </uc>
     </meta>
     <resumo>
-        <p>Document summary<url>ola</url><text>text</text></p>
+        <p>Neste trabalho, é suposto utilizar o material fornecido de um ficheiro<url>ola</url><text>text</text></p>
     </resumo>
     <resultados>
         <resultado>resultado 1</resultado>
