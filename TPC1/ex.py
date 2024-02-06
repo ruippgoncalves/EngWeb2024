@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 
 file = open("data/mapa.json","r",encoding="UTF-8").read()
 
@@ -29,7 +30,7 @@ html += "</body>"
 html += "</html>"
 
 if os.path.exists("build"):
-    os.remove("build")
+    shutil.rmtree("build")
 os.makedirs("build")
 
 file = open("build/mapa.html","w",encoding="UTF-8")
