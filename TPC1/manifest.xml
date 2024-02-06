@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doc>
+    <meta>
+        <title>Document Title</title>
+        <date>2013-01-01</date>
+        <author>
+            <id>1</id>
+            <nome>John Doe</nome>
+        </author>
+        <uc>
+            <sigla>UC1</sigla>
+            <nome>Use Case 1</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Document summary<url>ola</url><text>text</text></p>
+    </resumo>
+    <resultados>
+        <resultado>resultado 1</resultado>
+        <resultado>resultado 2</resultado>
+    </resultados>
+</doc>
