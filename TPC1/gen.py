@@ -95,6 +95,9 @@ if __name__ == '__main__':
     for i in os.listdir(atual_dir):
         imgs.append((re.search(r'\d+', i).group(), os.path.join(atual_dir, i)))
 
+    # TODO line to send
+    # TODO zip file names (is it suposed)
+    # TODO is it sorted?
     shuffle(imgs)
 
     # Build dir
