@@ -1,14 +1,18 @@
 import json
 import os
+import re
 import shutil
+from datetime import datetime
+from random import shuffle
 
 from utils.html_from_str_template import load_all_templates
-from utils.xml2json import xml2json
 
 text_dir = 'data/texto'
+atual_dir = 'data/atual'
 build_dir = 'build'
 
 templates = {}
+imgs = []
 
 index = {
     'tag': 'index',
@@ -58,8 +62,8 @@ def create_text(text):
     elif text['tag'] == 'meta':
         read_meta(text)
     elif text['tag'] == 'index':
-        s = sorted(text['content'], key=lambda x: int(x[0]))
-        lis = [f'<li><a href="{id}.html">{name}</a></li>' for id, name in s]
+        s = dict(text['content'])
+        lis = [templates['index-item'].render(id=id, name=s[id], src=l) for id, l in imgs]
         args['content'] = ''.join(lis)
     else:
         args['content'] = ''.join([create_text(t) for t in text['content']])
@@ -71,8 +75,11 @@ def create_text(text):
 
 
 def create_page(text):
+    # TODO is it supposed to sort for a given order or leave as it is on the xml? 33
+    # TODO 23 casas contains multiple of the same
+
     content = create_text(text)
-    render = templates['page'].render(title=cur_title, content=content)
+    render = templates['page'].render(title=cur_title, content=content, date=datetime.today().strftime('%d/%m/%Y'))
 
     out = open(os.path.join(build_dir, cur_id + '.html'), 'w', encoding='utf-8')
     out.write(render)
@@ -83,6 +90,12 @@ def create_page(text):
 if __name__ == '__main__':
     # xml2json(text_dir)
     templates = load_all_templates('templates')
+
+    # Image map
+    for i in os.listdir(atual_dir):
+        imgs.append((re.search(r'\d+', i).group(), os.path.join(atual_dir, i)))
+
+    shuffle(imgs)
 
     # Build dir
     if os.path.exists(build_dir):
@@ -101,5 +114,5 @@ if __name__ == '__main__':
 
     # Index
     cur_id = 'index'
-    cur_title = 'Cidades de Braga'
+    cur_title = 'Ruas de Braga'
     create_page(index)
