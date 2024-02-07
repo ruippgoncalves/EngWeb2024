@@ -14,10 +14,12 @@
         </uc>
     </meta>
     <resumo>
-        <p>Neste trabalho, é suposto utilizar o material fornecido de um ficheiro<url>ola</url><text>text</text></p>
+        <p>Neste trabalho, é suposto utilizar o material fornecido de um ficheiro<url href="https://epl.di.uminho.pt/~jcr/AULAS/EngWeb2024/semana1/MapaRuas-materialBase.zip">zip</url>. Neste ficheiro encontram-se um conjunto de informação sobre 60 ruas de Braga, nomeadamente imagens das localizações, denominado de atual, imagens com esboços das localizações, denominado imagens e por fim a informação da rua. O objetivo é desenvolver uma página para cada rua, e um indice para as mesmas.</p>
     </resumo>
     <resultados>
-        <resultado>resultado 1</resultado>
-        <resultado>resultado 2</resultado>
+        <resultado>Criação de páginas HTML</resultado>
+        <resultado>Criação de páginas automáticamente (script)</resultado>
+        <resultado>Operações sobre os formatos de XML e JSON</resultado>
+        <resultado>Estilização básica via CSS</resultado>
     </resultados>
 </doc>

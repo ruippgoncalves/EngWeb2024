@@ -16,3 +16,8 @@ Neste ficheiro encontram-se um conjunto de informação sobre 60 ruas de Braga, 
 O objetivo é desenvolver uma página para cada rua, e um indice para as mesmas.
 
 ## Resultados
+
+- Criação de páginas HTML
+- Criação de páginas automáticamente (script)
+- Operações sobre os formatos de XML e JSON
+- Estilização básica via CSS
