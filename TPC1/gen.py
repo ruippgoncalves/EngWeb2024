@@ -3,9 +3,9 @@ import os
 import re
 import shutil
 from datetime import datetime
-from random import shuffle
 
 from utils.html_from_str_template import load_all_templates
+from utils.xml2json import xml2json
 
 text_dir = 'data/texto'
 atual_dir = 'data/atual'
@@ -75,9 +75,6 @@ def create_text(text):
 
 
 def create_page(text):
-    # TODO is it supposed to sort for a given order or leave as it is on the xml? 33
-    # TODO 23 casas contains multiple of the same
-
     content = create_text(text)
     render = templates['page'].render(title=cur_title, content=content, date=datetime.today().strftime('%d/%m/%Y'))
 
@@ -88,17 +85,20 @@ def create_page(text):
     index['content'].append((cur_id, cur_title))
 
 if __name__ == '__main__':
-    # xml2json(text_dir)
+    xml2json(text_dir)
     templates = load_all_templates('templates')
 
     # Image map
-    for i in os.listdir(atual_dir):
-        imgs.append((re.search(r'\d+', i).group(), os.path.join(atual_dir, i)))
+    imgs_set = set()
 
-    # TODO line to send
-    # TODO zip file names (is it suposed)
-    # TODO is it sorted?
-    shuffle(imgs)
+    for i in os.listdir(atual_dir):
+        img = re.search(r'\d+', i).group()
+
+        if img not in imgs_set:
+            imgs.append((img, os.path.join(atual_dir, i)))
+            imgs_set.add(img)
+
+    imgs.sort(key=lambda x: int(x[0]))
 
     # Build dir
     if os.path.exists(build_dir):
