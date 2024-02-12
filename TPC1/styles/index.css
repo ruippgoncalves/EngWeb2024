@@ -12,6 +12,17 @@ body {
 
 /* Index */
 
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.search input {
+    width: 80%;
+    min-width: 300px;
+    max-width: 600px;
+}
+
 .place-list {
     list-style-type: none;
     padding: 0;
