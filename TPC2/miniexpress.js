@@ -52,7 +52,7 @@ export class MiniRouter {
             matched = true;
 
             for (let i = 0; i < routeParts.length && matched; i++) {
-                if (routeParts[i] === '=') {//.startsWith(':')) {
+                if (routeParts[i].startsWith(':')) {
                     const paramName = routeParts[i].slice(1);
                     params[paramName] = urlParts[i];
                 } else if (routeParts[i] === '*') {
@@ -152,6 +152,7 @@ export class MiniExpress extends MiniRouter {
             this._fillRes(res);
 
             this._handleRequest(req, res, () => {
+                res.status(404);
                 res.end()
             });
         });
