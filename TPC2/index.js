@@ -32,6 +32,10 @@ router.get('/', (req, res) => {
     res.sendHTML('<h1>Hello There 2</h1>');
 });
 
+router.get('/:id', (req, res) => {
+    res.sendMJinja2('templates/index.html', {title: req.params.id});
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

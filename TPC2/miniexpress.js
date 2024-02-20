@@ -52,7 +52,7 @@ export class MiniRouter {
             matched = true;
 
             for (let i = 0; i < routeParts.length && matched; i++) {
-                if (routeParts[i] === ':') {
+                if (routeParts[i] === '=') {//.startsWith(':')) {
                     const paramName = routeParts[i].slice(1);
                     params[paramName] = urlParts[i];
                 } else if (routeParts[i] === '*') {
@@ -65,23 +65,27 @@ export class MiniRouter {
         return matched ? {matched, params} : {matched};
     }
 
-    _findNext(req, res) {
+    _findNext(req, res, prevNext) {
         let cur = -1;
 
         const next = () => {
             cur += 1;
 
+            // If the current middleware matched nothing let's continue with the previous one
+            if (cur === this._middlewares.length) {
+                prevNext();
+                return;
+            }
+
             const middleware = this._middlewares[cur];
-            const curPath = middleware ? this._pathJoin(middleware.path) : '';
-            const {matched, params = {}} = middleware ? this._matchRoute(curPath, req.url.pathname) : {matched: false};
+            const curPath = this._pathJoin(middleware.path);
+            const {matched, params = {}} = this._matchRoute(curPath, req.url.pathname);
 
             if (matched) {
                 req.params = params;
                 middleware.handler(req, res, next);
-            } else if (cur <= this._middlewares.length) {
-                next();
             } else {
-                req.handler(req, res);
+                next();
             }
         };
 
@@ -89,8 +93,7 @@ export class MiniRouter {
     }
 
     _handleRequest(req, res, next) {
-        let n = this._findNext(req, res);
-        req.handler = next;
+        let n = this._findNext(req, res, next);
         n();
     }
 }
