@@ -5,5 +5,10 @@
     <title>{{title}}</title>
 </head>
 <body>
+    <ul>
+        <li {% if alunos_page %}class="page-active"{% endif %}><a href="/alunos">Alunos</a></li>
+        <li {% if cursos_page %}class="page-active"{% endif %}><a href="/cursos">Cursos</a></li>
+        <li {% if instrumentos_page %}class="page-active"{% endif %}><a href="/instrumentos">Instrumentos</a></li>
+    </ul>
 </body>
 </html>

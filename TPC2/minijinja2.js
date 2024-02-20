@@ -19,6 +19,11 @@ export function renderMJinja2(template, data, load=true) {
 
     // TODO check if nesting is required
 
+    // Render the {% include file %}
+    template = template.replace(/\{%\s*include\s+(\S+)\s+%}/g, (match, file) => {
+        return loadMJinja2Template(file);
+    });
+
     // Render the {{var}}
     template = template.replace(/\{\{([^}]+)}}/g, (match, variable) => {
         return data[variable.trim()] || '';
