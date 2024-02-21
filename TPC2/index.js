@@ -6,11 +6,6 @@ const PORT = process.env.PORT || "5000";
 let app = new MiniExpress();
 let router = new MiniRouter();
 
-app.use((req, res, next) => {
-    console.log(req.url);
-    next();
-});
-
 app.get('/', (req, res) => {
     res.sendHTML('<h1>Hello There</h1>');
 });
