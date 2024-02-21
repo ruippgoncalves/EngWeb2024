@@ -1,6 +1,8 @@
 import http from 'http';
 import url from 'url';
 import {renderMJinja2} from "./minijinja2.js";
+import path from "path";
+import fs from "fs";
 
 export class MiniRouter {
     _middlewares;
@@ -82,7 +84,7 @@ export class MiniRouter {
             const {matched, params = {}} = this._matchRoute(curPath, req.url.pathname);
 
             if (matched) {
-                req.params = params;
+                req.params = {...req.params, ...params};
                 middleware.handler(req, res, next);
             } else {
                 next();

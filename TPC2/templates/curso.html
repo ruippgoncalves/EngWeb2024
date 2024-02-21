@@ -5,7 +5,8 @@
     <title>Principio</title>
 </head>
 <body>
-<p>Selecione um para começar</p>
 {% include "templates/header.html" %}
+<h1>Curso de {{props.curso.designacao}}</h1>
+Este curso tem a duração {{props.curso.duracao}} e é um curso de {{props.curso.instrumento['#text']}}
 </body>
 </html>

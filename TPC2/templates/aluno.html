@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{props.aluno.nome}}</title>
+</head>
+<body>
+{% include "templates/header.html" %}
+<span><b>Aluno:</b> {{props.aluno.nome}} ({{props.aluno.id}})</span><br>
+<span><b>Data de nascimento:</b> {{props.aluno.dataNasc}}</span><br>
+<span><b>Estudos:</b> {{props.aluno.anoCurso}}º Ano de {{props.aluno.instrumento}} no {{props.curso.designacao}}</span>
+</body>
+</html>

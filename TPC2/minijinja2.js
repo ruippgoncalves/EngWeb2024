@@ -17,10 +17,11 @@ const subRegex = /^\{\{([^}]+)}}/;
 function parseSub(m, template, parsed) {
     const v = m[1];
 
-    parsed.push((data) => {
-        const properties = Object.keys(data).join(',');
-        return eval(`const {${properties}} = data;
-        ${v};`);
+    parsed.push((props) => {
+        // TODO I think it is safer like this, but I will take a look later on
+        // const properties = Object.keys(props).join(',');
+        // const {${properties}} = props;
+        return eval(`${v};`);
     });
 
     return template.slice(m[0].length);
@@ -35,7 +36,7 @@ function parseInclude(m, template, parsed) {
         return renderMJinja2(path, data);
     });
 
-    return template.slice(m[0].length - 1);
+    return template.slice(m[0].length);
 }
 
 const ifRegex = /^\{%\s*if\s+([^%]+)%}/;
@@ -56,13 +57,11 @@ function parseIf(m, template, parsed) {
     if (!m2) {
         console.error('An {% if %} tag does not have a matching {% endif %} tag');
     } else {
-        parsed.push((data) => {
-            const properties = Object.keys(data).join(',');
-            const e = eval(`const {${properties}} = data;
-            ${expr};`);
+        parsed.push((props) => {
+            const e = eval(`${expr};`);
             let res = '';
 
-            if (e) res = nParsed.map(i => i(data)).join('');
+            if (e) res = nParsed.map(i => i(props)).join('');
 
             return res;
         });
@@ -91,15 +90,13 @@ function parseFor(m, template, parsed) {
     if (!m2) {
         console.error('A {% for %} tag does not have a matching {% endfor %} tag');
     } else {
-        parsed.push((data) => {
-            const properties = Object.keys(data).join(',');
-            const iterableData = eval(`const {${properties}} = data;
-            ${iterable};`);
+        parsed.push((props) => {
+            const iterableData = eval(`${iterable};`);
             let res = '';
 
             if (Array.isArray(iterableData)) {
                 for (const i of iterableData) {
-                    const localData = {...data, [item]: i};
+                    const localData = {...props, [item]: i};
                     res += nParsed.map(parsedItem => parsedItem(localData)).join('');
                 }
             } else {

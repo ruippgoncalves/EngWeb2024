@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instrumentos</title>
+</head>
+<body>
+{% include "templates/header.html" %}
+<ul>
+    {% for instrumento in props.instrumentos %}
+    <li><a href="/cursos?instrumento={{props.instrumento.id}}">{{props.instrumento["#text"]}}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
