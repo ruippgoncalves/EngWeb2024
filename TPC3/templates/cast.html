@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Elenco - {{props.cast[0].cast}}</title>
+</head>
+<body>
+{% include "templates/header.html" %}
+
+<h1>{{props.cast[0].cast}}</h1>
+
+<h2>Filmes</h2>
+
+<ul>
+    {% for cas in props.cast %}
+    <li><a href="/movies/{{props.cas.movie.id}}">{{props.cas.movie.title}} ({{props.cas.movie.year}})</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
