@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doc>
+    <meta>
+        <title>Escola de Musica</title>
+        <date>2024-02-20</date>
+        <author>
+            <id>A101759</id>
+            <nome>Rui Gonçalves</nome>
+        </author>
+        <uc>
+            <sigla>EW</sigla>
+            <nome>Engenharia Web</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Neste trabalho, é suposto utilizar o material fornecido em formato JSON. Neste ficheiro encontram-se um conjunto de informação sobre alunos, os cursos em que os mesmos se encontram e o seu respetivo instrumento. O objetivo é desenvolver uma página para cada aluno, curso e um indice para as mesmas e para os instrumentos.</p>
+    </resumo>
+    <resultados>
+        <resultado>Criação de páginas HTML</resultado>
+        <resultado>Criação de páginas dinamicas</resultado>
+        <resultado>Operações sobre o formato de JSON</resultado>
+        <resultado>Utilização de API's atraves de axios e de json-server</resultado>
+    </resultados>
+</doc>

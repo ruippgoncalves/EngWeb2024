@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doc>
+    <meta>
+        <title>Filmes</title>
+        <date>2024-02-27</date>
+        <author>
+            <id>A101759</id>
+            <nome>Rui Gonçalves</nome>
+        </author>
+        <uc>
+            <sigla>EW</sigla>
+            <nome>Engenharia Web</nome>
+        </uc>
+    </meta>
+    <resumo>
+        <p>Neste trabalho, é suposto utilizar o material fornecido em formato JSON. Neste ficheiro encontram-se um conjunto de informação sobre filmes. Este ficheiro deve ser processado e corrigido. O objetivo é desenvolver uma página para cada filme, atores e categoria e um indice para os mesmas.</p>
+    </resumo>
+    <resultados>
+        <resultado>Criação de páginas HTML</resultado>
+        <resultado>Criação de páginas dinamicas</resultado>
+        <resultado>Operações sobre os formato de JSON</resultado>
+        <resultado>Estilização básica via CSS</resultado>
+        <resultado>Utilização de API's atraves de axios e de json-server</resultado>
+        <resultado>Correção de JSON</resultado>
+    </resultados>
+</doc>
