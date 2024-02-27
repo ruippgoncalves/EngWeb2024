@@ -24,12 +24,8 @@ for line in file:
     for ge in g:
         genres.append({'genre': ge, 'movie': final})
 
-    # TODO can this be done automatically?
-    prev = ["(Narrator)", "[Carol Drake", "| Comedy", "50 Cent", ]
-
     for ca in c:
-        if len(ca) < 15 and ca.istitle() and ca not in prev:
-            cast.append({'cast': ca, 'movie': final})
+        cast.append({'cast': ca, 'movie': final})
 
 data = {
     'movies': movies,
