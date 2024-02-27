@@ -12,13 +12,13 @@ export class MiniRouter {
         this._middlewares = [];
     }
 
-    _addMiddleware(path, method, handler) {
+    _addMiddleware(path, method, handler, terminal = true) {
         if (handler instanceof MiniRouter) {
             const router = handler;
             handler = (req, res, next) => router._handleRequest(req, res, next);
         }
 
-        this._middlewares.push({path, method, handler});
+        this._middlewares.push({path, method, handler, terminal});
     }
 
     use(path, handler) {
@@ -27,7 +27,7 @@ export class MiniRouter {
             path = '*';
         }
 
-        this._addMiddleware(path, '*', handler);
+        this._addMiddleware(path, '*', handler, false);
 
         return this;
     }
@@ -38,9 +38,16 @@ export class MiniRouter {
         return this;
     }
 
-    _matchRoute(route, url) {
-        const routeParts = route.split('/');
-        const urlParts = url.split('/');
+    _cleanTerminals(arr) {
+        while (arr.length !== 0 && arr[arr.length - 1] === '')
+            arr.pop()
+
+        return arr;
+    }
+
+    _matchRoute(route, url, terminal) {
+        const routeParts = this._cleanTerminals(route.split('/'));
+        const urlParts = this._cleanTerminals(url.split('/'));
         let matched = false;
         let params = {};
         let newPathname = url;
@@ -56,6 +63,10 @@ export class MiniRouter {
                 } else if (routeParts[i] !== urlParts[i]) {
                     matched = false;
                 }
+            }
+
+            if (terminal) {
+                matched &= urlParts.length === routeParts.length;
             }
 
             if (matched) {
@@ -79,15 +90,19 @@ export class MiniRouter {
             }
 
             const middleware = this._middlewares[cur];
-            const pathname = req.url.pathname;
-            const {matched, params = {}, newPathname} = this._matchRoute(middleware.path, pathname);
+            const pathname = req.url;
+            const {
+                matched,
+                params = {},
+                newPathname
+            } = this._matchRoute(middleware.path, pathname, middleware.terminal);
 
             if (matched) {
                 req.params = {...req.params, ...params};
-                req.url.pathname = newPathname;
+                req.url = newPathname;
 
                 middleware.handler(req, res, () => {
-                    req.url.pathname = pathname;
+                    req.url = pathname;
                     next();
                 });
             } else {
@@ -112,7 +127,7 @@ export class MiniExpress extends MiniRouter {
     _fillReq(req) {
         req.originalUrl = req.url;
         // TODO deprecation warning
-        req.url = url.parse(req.url, true);
+        req.url = url.parse(req.url, true).pathname;
     }
 
     _fillRes(res) {
@@ -171,7 +186,7 @@ export class MiniExpress extends MiniRouter {
 
 export function MiniExpressStatic(source) {
     return function (req, res, next) {
-        const filePath = path.join(source, req.url.pathname);
+        const filePath = path.join(source, req.url);
 
         fs.readFile(filePath, (err, data) => {
             if (err) {

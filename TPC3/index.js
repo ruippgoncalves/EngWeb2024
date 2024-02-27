@@ -7,7 +7,7 @@ const app = new MiniExpress();
 const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString().substring(0, 16)}] ${req.method} ${req.url.pathname}`);
+    console.log(`[${new Date().toISOString().substring(0, 16)}] ${req.method} ${req.originalUrl}`);
     next();
 });
 
