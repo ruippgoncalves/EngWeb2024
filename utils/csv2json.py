@@ -1,7 +1,7 @@
 import os
 import re
 import sys
-import xml.etree.ElementTree as ET
+import csv
 import json
 
 
@@ -28,25 +28,29 @@ def _xml_to_dict(element):
     return result
 
 
-def xml2json(folder):
+def csv2json(folder):
     for filename in os.listdir(folder):
-        if not filename.endswith('.xml'):
+        if not filename.endswith('.csv'):
             continue
 
         f = open(os.path.join(folder, filename), 'r', encoding='utf-8')
-        data = ET.parse(f).getroot()
-        data = _xml_to_dict(data)
+        csv_reader = csv.DictReader(f, delimiter=';')
 
-        json_file = open(os.path.join(folder, filename.replace('.xml', '.json')), 'w', encoding='utf-8')
+        data = []
+
+        for row in csv_reader:
+            data.append(row)
+
+        json_file = open(os.path.join(folder, filename.replace('.csv', '.json')), 'w', encoding='utf-8')
         json.dump(data, json_file, ensure_ascii=False, indent=4)
         json_file.close()
 
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print('Usage: python xml2json.py <folder>')
+        print('Usage: python csv2json.py <folder>')
         exit(1)
 
     folder = sys.argv[1]
 
-    xml2json(folder)
+    csv2json(folder)

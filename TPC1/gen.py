@@ -4,7 +4,7 @@ import re
 import shutil
 from datetime import datetime
 
-from utils.html_from_str_template import load_all_templates
+from TPC1.html_from_str_template import load_all_templates
 from utils.xml2json import xml2json
 
 text_dir = 'data/texto'
