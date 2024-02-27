@@ -12,29 +12,35 @@ export class MiniRouter {
         this._middlewares = [];
     }
 
-    use(handler) {
-        this._middlewares.push({path: '*', method: '*', handler});
+    _addMiddleware(path, method, handler) {
+        if (handler instanceof MiniRouter) {
+            const router = handler;
+            handler = (req, res, next) => router._handleRequest(req, res, next);
+        }
+
+        this._middlewares.push({path, method, handler});
+    }
+
+    use(path, handler) {
+        if (typeof path === 'function') {
+            handler = path;
+            path = '*';
+        }
+
+        this._addMiddleware(path, '*', handler);
+
+        return this;
     }
 
     get(path, handler) {
-        this._middlewares.push({path, method: 'GET', handler});
-    }
+        this._addMiddleware(path, 'GET', handler);
 
-    route(path, router) {
-        this._middlewares.push({path, method: '*', handler: (req, res, next) => router._handleRequest(req, res, next)});
-    }
-
-    _normalizePath(p) {
-        let final = p;
-
-        if (!final.endsWith('/')) final = final + '/';
-
-        return final;
+        return this;
     }
 
     _matchRoute(route, url) {
         const routeParts = route.split('/');
-        const urlParts = this._normalizePath(url).split('/');
+        const urlParts = url.split('/');
         let matched = false;
         let params = {};
         let newPathname = url;
@@ -132,8 +138,7 @@ export class MiniExpress extends MiniRouter {
 
         res.redirect = (url) => {
             res.setHeader('Location', url);
-            res.status(301);
-            res.end();
+            res.status(301).end();
 
             return res;
         }
@@ -154,8 +159,7 @@ export class MiniExpress extends MiniRouter {
             this._fillRes(res);
 
             this._handleRequest(req, res, () => {
-                res.status(404);
-                res.end()
+                res.status(404).end();
             });
         });
 
@@ -166,19 +170,17 @@ export class MiniExpress extends MiniRouter {
 }
 
 export function MiniExpressStatic(source) {
-    return function (req, res) {
+    return function (req, res, next) {
         const filePath = path.join(source, req.url.pathname);
 
         fs.readFile(filePath, (err, data) => {
             if (err) {
-                res.status(404);
-                res.end();
+                next();
                 return;
             }
 
             res.setHeader('Content-Type', mime.lookup(filePath));
             res.status(200);
-
             res.write(data);
             res.end();
         });

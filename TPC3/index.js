@@ -5,13 +5,18 @@ import cast from "./routes/cast.js";
 
 const app = new MiniExpress();
 
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString().substring(0, 16)}] ${req.method} ${req.url.pathname}`);
+    next();
+});
+
 app.get('/', (_, res) => {
     res.redirect('/movies');
 });
 
-app.route('/movies', movies);
-app.route('/genres', genres);
-app.route('/cast', cast);
+app.use('/movies', movies);
+app.use('/genres', genres);
+app.use('/cast', cast);
 
 app.use(MiniExpressStatic('static'));
 

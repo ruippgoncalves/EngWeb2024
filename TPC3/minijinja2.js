@@ -18,10 +18,14 @@ function parseSub(m, template, parsed) {
     const v = m[1];
 
     parsed.push((props) => {
-        // TODO I think it is safer like this, but I will take a look later on
-        // const properties = Object.keys(props).join(',');
-        // const {${properties}} = props;
-        return eval(`${v};`);
+        try {
+            // TODO I think it is safer like this, but I will take a look later on
+            // const properties = Object.keys(props).join(',');
+            // const {${properties}} = props;
+            return eval(`${v};`);
+        } catch (e) {
+            console.error(`MJinja2 rendering error on ${m[0]}`, e)
+        }
     });
 
     return template.slice(m[0].length);
@@ -58,12 +62,16 @@ function parseIf(m, template, parsed) {
         console.error('An {% if %} tag does not have a matching {% endif %} tag');
     } else {
         parsed.push((props) => {
-            const e = eval(`${expr};`);
-            let res = '';
+            try {
+                const e = eval(`${expr};`);
+                let res = '';
 
-            if (e) res = nParsed.map(i => i(props)).join('');
+                if (e) res = nParsed.map(i => i(props)).join('');
 
-            return res;
+                return res;
+            } catch (e) {
+                console.error(`MJinja2 rendering error on ${m[0]}`, e)
+            }
         });
 
         template = template.slice(m2[0].length);
@@ -91,19 +99,23 @@ function parseFor(m, template, parsed) {
         console.error('A {% for %} tag does not have a matching {% endfor %} tag');
     } else {
         parsed.push((props) => {
-            const iterableData = eval(`${iterable};`);
-            let res = '';
+            try {
+                const iterableData = eval(`${iterable};`);
+                let res = '';
 
-            if (Array.isArray(iterableData)) {
-                for (const i of iterableData) {
-                    const localData = {...props, [item]: i};
-                    res += nParsed.map(parsedItem => parsedItem(localData)).join('');
+                if (Array.isArray(iterableData)) {
+                    for (const i of iterableData) {
+                        const localData = {...props, [item]: i};
+                        res += nParsed.map(parsedItem => parsedItem(localData)).join('');
+                    }
+                } else {
+                    console.error(`${iterable} is not an iterable`);
                 }
-            } else {
-                console.error(`${iterable} is not an iterable`);
-            }
 
-            return res;
+                return res;
+            } catch (e) {
+                console.error(`MJinja2 rendering error on ${m[0]}`, e)
+            }
         });
 
         template = template.slice(m2[0].length);

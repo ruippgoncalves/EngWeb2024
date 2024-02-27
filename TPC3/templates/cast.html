@@ -6,18 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Elenco - {{props.cast[0].cast}}</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 {% include "templates/header.html" %}
 
-<h1>{{props.cast[0].cast}}</h1>
+<main>
+    <h1>{{props.cast[0].cast}}</h1>
 
-<h2>Filmes</h2>
+    <h2>Filmes</h2>
 
-<ul>
-    {% for cas in props.cast %}
-    <li><a href="/movies/{{props.cas.movie.id}}">{{props.cas.movie.title}} ({{props.cas.movie.year}})</a></li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for cas in props.cast %}
+        <li><a href="/movies/{{props.cas.movie.id}}">{{props.cas.movie.title}} ({{props.cas.movie.year}})</a></li>
+        {% endfor %}
+    </ul>
+</main>
 </body>
 </html>

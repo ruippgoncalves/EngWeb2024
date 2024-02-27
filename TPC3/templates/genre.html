@@ -5,19 +5,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Genero - {{props.genre[0].genre}}</title>
+    <title>Genero - {{props.genreName}}</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 {% include "templates/header.html" %}
 
-<h1>{{props.genre[0].genre}}</h1>
+<main>
+    <h1>{{props.genreName}}</h1>
 
-<h2>Filmes</h2>
+    <h2>Filmes</h2>
 
-<ul>
-    {% for gen in props.genre %}
-    <li><a href="/movies/{{props.gen.movie.id}}">{{props.gen.movie.title}} ({{props.gen.movie.year}})</a></li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for gen in props.genre %}
+        <li><a href="/movies/{{props.gen.movie.id}}">{{props.gen.movie.title}} ({{props.gen.movie.year}})</a></li>
+        {% endfor %}
+    </ul>
+</main>
 </body>
 </html>

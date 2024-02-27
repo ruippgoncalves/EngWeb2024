@@ -5,23 +5,26 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movie - {{props.movie.title}}</title>
+    <title>Filme - {{props.movie.title}}</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 {% include "templates/header.html" %}
 
-<h1>{{props.movie.title}} <span>{{props.movie.year}}</span></h1>
-<h2>Generos</h2>
-<ul>
-    {% for genre in props.genres %}
-    <li><a href="/genres/{{props.genre.genre}}">{{props.genre.genre}}</a></li>
-    {% endfor %}
-</ul>
-<h2>Elenco</h2>
-<ul>
-    {% for cas in props.cast %}
-    <li><a href="/cast/{{props.cas.cast}}">{{props.cas.cast}}</a></li>
-    {% endfor %}
-</ul>
+<main>
+    <h1>{{props.movie.title}} <span>{{props.movie.year}}</span></h1>
+    <h2>Generos</h2>
+    <ul>
+        {% for genre in props.genres %}
+        <li><a href="/genres/{{props.genre.genre}}">{{props.genre.genre}}</a></li>
+        {% endfor %}
+    </ul>
+    <h2>Elenco</h2>
+    <ul>
+        {% for cas in props.cast %}
+        <li><a href="/cast/{{props.cas.cast}}">{{props.cas.cast}}</a></li>
+        {% endfor %}
+    </ul>
+</main>
 </body>
 </html>
