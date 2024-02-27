@@ -4,6 +4,7 @@ import genres from "./routes/genres.js";
 import cast from "./routes/cast.js";
 
 const app = new MiniExpress();
+const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString().substring(0, 16)}] ${req.method} ${req.url.pathname}`);
@@ -20,4 +21,6 @@ app.use('/cast', cast);
 
 app.use(MiniExpressStatic('static'));
 
-app.listen(5000);
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
