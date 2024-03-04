@@ -1,0 +1,35 @@
+body {
+    background-color: whitesmoke;
+    margin: 0;
+}
+
+.navbar {
+    margin: 0;
+    padding: 3px 0;
+    list-style-type: none;
+
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    background-color: #262626;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    margin: 0 0 0 10px;
+}
+
+main ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-column-gap: 50px;
+}
+
+main ul li {
+    width: 100%;
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Editar Periodo - {{props.periodo.periodo}}</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+{% include "templates/header.html" %}
+
+<main>
+    <form action="/periodos/{{props.periodo.id}}" method="post">
+        <label for="periodo">Nome do periodo</label>
+        <input type="text" id="periodo" name="periodo" placeholder="Nome do periodo" value="{{props.periodo.periodo}}">
+        <br>
+
+        <input type="submit" value="Atualizar">
+    </form>
+
+    <button onclick="deletePeriodo()">Apagar</button>
+</main>
+
+<script>
+    async function deletePeriodo() {
+        if (confirm('Tem a certeza que quer apagar este periodo e os seus compositores?')) {
+            await fetch('/periodos/{{props.periodo.id}}', {
+                method: 'DELETE'
+            });
+            window.location.href = '/periodos';
+        }
+    }
+</script>
+</body>
+</html>

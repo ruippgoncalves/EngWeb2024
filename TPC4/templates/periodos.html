@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Periodos</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+{% include "templates/header.html" %}
+
+<main>
+    <ul>
+        {% for periodo in props.periodos %}
+        <li><a href="/periodos/{{props.periodo.id}}">{{props.periodo.periodo}}</a></li>
+        {% endfor %}
+    </ul>
+
+    <a href="/periodos/novo">Novo Periodo</a>
+</main>
+</body>
+</html>

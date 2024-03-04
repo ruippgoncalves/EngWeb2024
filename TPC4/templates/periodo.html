@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Periodo - {{props.periodo.periodo}}</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+{% include "templates/header.html" %}
+
+<main>
+    <h1>{{props.periodo.periodo}}</h1>
+
+    <h2>Compositores</h2>
+    <ul>
+        {% for compositor in props.compositores %}
+        <li><a href="/compositores/{{props.compositor.id}}">{{props.compositor.nome}}</a></li>
+        {% endfor %}
+    </ul>
+
+    <a href="/periodos/{{props.periodo.id}}/editar">Editar</a>
+</main>
+</body>
+</html>
