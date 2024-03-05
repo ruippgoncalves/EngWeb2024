@@ -40,18 +40,7 @@
         <input type="submit" value="Atualizar">
     </form>
 
-    <button onclick="deleteCompositor()">Apagar</button>
+    <a href="/compositores/{{props.compositor.id}}/delete">Apagar</a>
 </main>
-
-<script>
-    async function deleteCompositor() {
-        if (confirm('Tem a certeza que quer apagar este compositor?')) {
-            await fetch('/compositores/{{props.compositor.id}}', {
-                method: 'DELETE'
-            });
-            window.location.href = '/compositores';
-        }
-    }
-</script>
 </body>
 </html>

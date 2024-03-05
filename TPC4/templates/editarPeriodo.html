@@ -20,18 +20,7 @@
         <input type="submit" value="Atualizar">
     </form>
 
-    <button onclick="deletePeriodo()">Apagar</button>
+    <a href="/periodos/{{props.periodo.id}}/delete">Apagar</a>
 </main>
-
-<script>
-    async function deletePeriodo() {
-        if (confirm('Tem a certeza que quer apagar este periodo e os seus compositores?')) {
-            await fetch('/periodos/{{props.periodo.id}}', {
-                method: 'DELETE'
-            });
-            window.location.href = '/periodos';
-        }
-    }
-</script>
 </body>
 </html>

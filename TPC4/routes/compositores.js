@@ -55,7 +55,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// TODO it should be a PUT request
 router.post('/:id', async (req, res) => {
     try {
         const compositor = await axios.put(`http://localhost:3000/compositores/${req.params.id}`, req.body);
@@ -68,7 +67,7 @@ router.post('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.get('/:id/delete', async (req, res) => {
     try {
         const compositor = await axios.delete(`http://localhost:3000/compositores/${req.params.id}`);
 
