@@ -1,0 +1,14 @@
+extends layout
+
+block title
+    | Compositor - #{compositor.nome}
+
+block content
+    main
+        h1
+            span #{compositor.nome}
+            span.data #{compositor.dataNasc}-#{compositor.dataObito}
+        a(href=`/periodos/${compositor.periodoId}`) Periodo #{compositor.periodo.periodo}
+        h2 Biografia
+        p #{compositor.bio}
+        a(href=`/compositores/editar/${compositor.id}`) Editar

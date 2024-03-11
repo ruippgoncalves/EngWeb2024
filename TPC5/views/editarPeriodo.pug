@@ -1,0 +1,15 @@
+extends layout
+
+block title
+    | Editar Periodo - #{periodo.periodo}
+
+block content
+    main
+        form(action=`/periodos/${periodo.id}`, method="post")
+            label(for="periodo") Nome do periodo
+            input(type="text", id="periodo", name="periodo", placeholder="Nome do periodo", value=periodo.periodo)
+            br
+
+            input(type="submit", value="Atualizar")
+
+        a(href=`/periodos/delete/${periodo.id}`) Apagar

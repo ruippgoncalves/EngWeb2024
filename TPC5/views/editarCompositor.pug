@@ -1,0 +1,32 @@
+extends layout
+
+block title
+    | Editar Compositor - #{compositor.nome}
+
+block content
+    main
+        form(action=`/compositores/${compositor.id}`, method="post")
+            label(for="nome") Nome do compositor
+            input(type="text", id="nome", name="nome", placeholder="Nome do compositor", value=compositor.nome)
+            br
+
+            label(for="bio") Biografia do compositor
+            input(type="text", id="bio", name="bio", placeholder="Biografia do compositor", value=compositor.bio)
+            br
+
+            label(for="dataNasc") Data de nascimento do compositor
+            input(type="date", id="dataNasc", name="dataNasc", placeholder="Data de nascimento do compositor", value=compositor.dataNasc)
+            br
+
+            label(for="dataObito") Data de obito do compositor
+            input(type="date", id="dataObito", name="dataObito", placeholder="Data de obito do compositor", value=compositor.dataObito)
+            br
+
+            fieldset
+                legend Períodos
+                each periodo in periodos
+                    input(type="radio", name="periodoId", id=`p${periodo.id}`, value=periodo.id, checked=(compositor.periodoId === periodo.id))
+                    label(for=`p${periodo.id}`) #{periodo.periodo}
+            input(type="submit", value="Atualizar")
+
+        a(href=`/compositores/delete/${compositor.id}`) Apagar
