@@ -1,0 +1,31 @@
+extends layout
+
+block title
+    | Novo Compositor
+
+block content
+    main
+        form(action="/compositores", method="post")
+            label(for="nome") Nome do compositor
+            input(type="text", id="nome", name="nome", placeholder="Nome do compositor")
+            br
+
+            label(for="bio") Biografia do compositor
+            input(type="text", id="bio", name="bio", placeholder="Biografia do compositor")
+            br
+
+            label(for="dataNasc") Data de nascimento do compositor
+            input(type="date", id="dataNasc", name="dataNasc", placeholder="Data de nascimento do compositor")
+            br
+
+            label(for="dataObito") Data de obito do compositor
+            input(type="date", id="dataObito", name="dataObito", placeholder="Data de obito do compositor")
+            br
+
+            fieldset
+                legend Períodos
+                each periodo in periodos
+                    input(type="radio", name="periodoId", id=`p${periodo.id}`, value=periodo.id)
+                    label(for=`p${periodo.id}`) #{periodo.periodo}
+
+            input(type="submit", value="Adicionar")

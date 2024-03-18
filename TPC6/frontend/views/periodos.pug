@@ -1,0 +1,13 @@
+extends layout
+
+block title
+    | Periodos
+
+block content
+    main
+        ul
+            each periodo in periodos
+                li
+                    a(href=`/periodos/${periodo.id}`) #{periodo.periodo}
+
+        a(href="/periodos/novo") Novo Periodo

@@ -1,0 +1,13 @@
+extends layout
+
+block title
+    | Novo Periodo
+
+block content
+    main
+        form(action="/periodos", method="post")
+            label(for="periodo") Nome do periodo
+            input(type="text", id="periodo", name="periodo", placeholder="Nome do periodo")
+            br
+
+            input(type="submit", value="Adicionar")
