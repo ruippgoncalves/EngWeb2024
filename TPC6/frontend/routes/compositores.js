@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const compositores = await axios('http://localhost:3000/compositores?_embed=periodo'); // TODO _embed
+        const compositores = await axios('http://localhost:3000/compositores?_embed=periodo');
 
         if (compositores.status === 404) return res.status(404).end();
 

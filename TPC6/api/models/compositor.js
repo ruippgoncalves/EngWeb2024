@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const compositorSchema = new mongoose.Schema({
-    _id: {type: String, unique: true, required: true},
+    _id: {type: String, required: true},
     nome: {type: String, required: true},
     bio: {type: String, required: true},
     dataNasc: {type: Date, required: true},

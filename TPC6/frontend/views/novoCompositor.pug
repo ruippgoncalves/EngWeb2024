@@ -25,7 +25,7 @@ block content
             fieldset
                 legend Períodos
                 each periodo in periodos
-                    input(type="radio", name="periodoId", id=`p${periodo.id}`, value=periodo.id)
-                    label(for=`p${periodo.id}`) #{periodo.periodo}
+                    input(type="radio", name="periodoId", id=`p${periodo._id}`, value=periodo.id)
+                    label(for=`p${periodo._id}`) #{periodo.periodo}
 
             input(type="submit", value="Adicionar")

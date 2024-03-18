@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
     console.log(req.originalUrl)
     try {
         const periodo = await axios(`http://localhost:3000/periodos/${req.params.id}`);
-        const compositores = await axios(`http://localhost:3000/compositores?periodoId=${req.params.id}`); // TODO periodoId
+        const compositores = await axios(`http://localhost:3000/compositores?periodoId=${req.params.id}`);
 
         if (periodo.status === 404 || compositores.status === 404) return res.status(404).end();
 
@@ -63,12 +63,6 @@ router.post('/:id', async (req, res) => {
 
 router.get('/delete/:id', async (req, res) => {
     try {
-        const compositores = await axios(`http://localhost:3000/compositores?periodoId=${req.params.id}`);
-
-        for (const compositor of compositores.data) {
-            await axios.delete(`http://localhost:3000/compositores/${compositor.id}`);
-        }
-
         await axios.delete(`http://localhost:3000/periodos/${req.params.id}`);
 
         res.redirect('/periodos');

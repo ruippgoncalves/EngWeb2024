@@ -5,11 +5,11 @@ block title
 
 block content
     main
-        form(action=`/periodos/${periodo.id}`, method="post")
+        form(action=`/periodos/${periodo._id}`, method="post")
             label(for="periodo") Nome do periodo
             input(type="text", id="periodo", name="periodo", placeholder="Nome do periodo", value=periodo.periodo)
             br
 
             input(type="submit", value="Atualizar")
 
-        a(href=`/periodos/delete/${periodo.id}`) Apagar
+        a(href=`/periodos/delete/${periodo._id}`) Apagar
