@@ -9,7 +9,7 @@ export default {
         return periodo.findOne({_id: id}).exec();
     },
 
-    insert(data) {
+    create(data) {
         return periodo.insertMany([data]).exec();
     },
 

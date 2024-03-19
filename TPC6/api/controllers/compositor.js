@@ -53,7 +53,7 @@ export default {
         ]).exec();
     },
 
-    insert(data) {
+    create(data) {
         return compositor.insertMany([data]).exec();
     },
 
