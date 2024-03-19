@@ -15,6 +15,12 @@ router.get('/', (req, res) => {
     }
 });
 
+router.post('/', (req, res) => {
+    compositor.create(req.body)
+        .then(() => res.sendStatus(201))
+        .catch(error => res.jsonp(error));
+});
+
 router.get('/:id', (req, res) => {
     compositor.findById(req.params.id)
         .then(data => res.jsonp(data[0] || {}))

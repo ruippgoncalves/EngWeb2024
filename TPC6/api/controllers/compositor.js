@@ -53,6 +53,10 @@ export default {
         ]).exec();
     },
 
+    insert(data) {
+        return compositor.insertMany([data]).exec();
+    },
+
     update(id, data) {
         return compositor.findOneAndUpdate({_id: id}, data).exec();
     },

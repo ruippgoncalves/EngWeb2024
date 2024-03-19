@@ -9,6 +9,10 @@ export default {
         return periodo.findOne({_id: id}).exec();
     },
 
+    insert(data) {
+        return periodo.insertMany([data]).exec();
+    },
+
     update(id, data) {
         return periodo.findOneAndUpdate({_id: id}, data).exec();
     },

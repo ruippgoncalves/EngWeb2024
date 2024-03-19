@@ -10,6 +10,12 @@ router.get('/', (req, res) => {
         .catch(error => res.jsonp(error));
 });
 
+router.post('/', (req, res) => {
+    periodo.create(req.body)
+        .then(() => res.sendStatus(201))
+        .catch(error => res.jsonp(error));
+});
+
 router.get('/:id', (req, res) => {
     periodo.findById(req.params.id)
         .then(data => res.jsonp(data))
