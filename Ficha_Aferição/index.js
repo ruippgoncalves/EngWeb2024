@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 
 app.use('/pessoas', pessoas);
 app.use('/modalidades', modalidades);
+app.use(express.static('public'));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
