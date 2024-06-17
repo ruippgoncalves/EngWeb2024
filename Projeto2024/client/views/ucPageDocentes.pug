@@ -1,0 +1,51 @@
+extends layout
+
+block head 
+    link(rel='stylesheet', href='/stylesheets/ucPageDocentes.css')
+    link(rel='stylesheet', href='/stylesheets/docenteCard.css')
+    link(rel='stylesheet', href='/stylesheets/dropdown.css')
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}`) UC
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Docentes
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/aulas`) Aulas
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/resources`) Conteúdo
+                    if producer || admin
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/users`) Inscritos
+                    
+    if producer || admin
+        .flexbox.flex-grow.space-between.w3-margin
+            div
+            a.button.gold.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/docentes/add`) +
+
+    section.articles
+        each d in docentes
+            .w3-container
+                article.article
+                    .article-wrapper
+                        figure.figure
+                            img(src=`/static/${id}/${d.foto}` alt=`${d.nome}`)
+                        .article-body
+                            h2=d.nome
+                            p=d.email
+                            p=d.categoria
+                            p=d.filiacao
+
+                    if d.webpage !== ''
+                        a.read-more(href=`${d.webpage}`, target="about:blank")
+
+                if producer || admin
+                    .w3-container.height-100px.flexbox.align-start
+                        a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/docentes/update/${d._id}`) Atualizar
+                        a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/docentes/delete/${d._id}`) Remover

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sites xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="manifest.xsd">
+    <ucs>
+        <uc sigla="ATP2023" path="./metaATP2023.json">
+            <resources>
+                <file path="ola.pdf"/>
+            </resources>
+        </uc>
+        <uc sigla="ENGWEB2024" path="./metaENGWEB2024.json">
+            <resources>
+            </resources>
+        </uc>
+        <uc sigla="RPCW2024" path="./metaRPCW2024.json">
+            <resources>
+            </resources>
+        </uc>
+    </ucs>
+</sites>

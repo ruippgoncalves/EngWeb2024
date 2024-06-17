@@ -1,0 +1,78 @@
+extends layout
+
+block head
+    link(rel='stylesheet', href='/stylesheets/ucPageRecursos.css')
+    link(rel='stylesheet', href='/stylesheets/aulaRecursoCard.css')
+    link(rel='stylesheet', href='/stylesheets/dropdown.css')
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}`) UC
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Recursos
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/docentes`) Docentes
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/aulas`) Aulas
+                    if producer || admin
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/users`) Inscritos
+
+    if producer || admin
+        .flexbox.flex-grow.space-between.w3-margin.w3-padding
+            div
+            a.button.gold.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/resources/add`) +
+
+
+    .w3-container
+        each recurso in resources
+            .w3-margin
+                .card.text-max-width
+                    p.word-wrap.card-header #{recurso.titulo}
+                    .word-wrap !{recurso.descricao}
+                    .w3-container.flexbox.flex-grow.space-between(id=`embed-${recurso._id}-default`)
+                        .flexbox.flex-grow
+                        div
+                            a.button.margin-10px.padding-10px.border-1px-black(href=`/static/${id}/${recurso._id}`) Download
+
+                            if renderScratch && recurso.isScratch
+                                a.button.margin-10px.padding-10px.border-1px-black(href='javascript:void(0)' onclick=`createScratchEmbed("${id}", "${recurso._id}")`) Abrir Recurso
+                            else if renderPDF && recurso.isPdf
+                                a.button.margin-10px.padding-10px.border-1px-black(href='javascript:void(0)' onclick=`showPDF("${recurso._id}")`) Abrir Recurso
+                            else if renderFlash && recurso.isFlash
+                                a.button.margin-10px.padding-10px.border-1px-black(href='javascript:void(0)' onclick=`createRuffleEmbed("${id}", "${recurso._id}")`) Abrir Recurso
+                            if producer || admin
+                                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/recursos/delete/${recurso._id}`) Remover Recurso
+
+                    if renderScratch && recurso.isScratch
+                        .hidden(id=`embed-${recurso._id}-container`)
+                            .hidden(style="user-select: none;" id=`embed-${recurso._id}`)
+                            .hidden(style="user-select: none;" id=`embed-${recurso._id}-meta`)
+
+                    if renderPDF && recurso.isPdf
+                        .display-none(id=`pdf-${recurso._id}`)
+                            iframe.min-height-400px(src=`/pdf.js/web/viewer.html?file=/static/${id}/${recurso._id}`, frameborder="0" style="width: 100%; heigth:100%;")
+                            .flexbox.flex-column.flex-grow.space-between
+                                .flexbox
+                                    a.button.margin-10px.padding-10px.border-1px-black(href='javascript:void(0)' onclick=`closePDF("${recurso._id}")`) Fechar Recurso
+                                    a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/resources/${recurso._id}`) Abrir noutro separador
+                    
+                    if renderFlash && recurso.isFlash
+                        .hidden(id=`embed-${recurso._id}-container`)
+                            .hidden(style="user-select: none;" id=`embed-${recurso._id}`)
+                            .hidden(style="user-select: none;" id=`embed-${recurso._id}-meta`)
+            
+    if renderScratch
+        script(src="/javascripts/scratch-embed.js")
+        script(src="/javascripts/scratch-embed-init.js")
+    if renderPDF
+        script(src="/javascripts/pdf-embed-init.js")
+    if renderFlash
+        script(src="/javascripts/ruffle-embed.js")
+        script(src="/javascripts/ruffle-embed-init.js")

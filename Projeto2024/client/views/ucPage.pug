@@ -1,0 +1,95 @@
+extends layout
+
+block head
+    link(rel="alternate", href=`/ucs/${uc._id}/feed/atom`, type="application/atom+xml", title=uc.titulo)
+    link(rel="alternate", href=`/ucs/${uc._id}/feed/rss`, type="application/rss+xml", title=uc.titulo)
+    link(rel='stylesheet', href='/stylesheets/ucPage.css')
+    link(rel='stylesheet', href='/stylesheets/dropdown.css')
+    link(rel='stylesheet', href='/stylesheets/anuncioCard.css')
+
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs`) Voltar
+
+        header.middleNavbar.flexbox.flex-column.justify-center.align-center
+            h1.white-smoke=uc.titulo
+            h3.white-smoke=uc._id
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${uc._id}/docentes`) Docentes
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${uc._id}/aulas`) Aulas
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${uc._id}/resources`) Conteúdo
+                    if producer || admin
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${uc._id}/users`) Inscritos
+
+    .body
+        .leftBody.flexbox.flex-column.w3-padding 
+            table.w3-table-all.margin-vertical-16px
+                thead
+                    tr 
+                        th Aulas Teóricas
+
+                tbody 
+                    each h in uc.horario.teoricas
+                        tr 
+                            td=h
+            table.w3-table-all.margin-vertical-16px
+                thead 
+                    tr 
+                        th Aulas Práticas
+
+                tbody 
+                    each h in uc.horario.praticas
+                        tr 
+                            td=h
+            
+            .flexbox.space-between.margin-vertical-16px
+                table.w3-table-all.margin-rigth-16px
+                    thead 
+                        tr 
+                            th Avaliação
+
+                    tbody 
+                        each a in uc.avaliacao
+                            tr 
+                                td=a
+
+                table.w3-table-all.margin-left-16px
+                    thead 
+                        tr 
+                            th Datas Importantes:
+
+                    tbody 
+                        each d in uc.datas
+                            tr 
+                                td #{d.nome}: #{d.descricao}
+
+        .rightBody.w3-container
+            if producer || admin
+                .flexbox.flex-grow.space-between
+                    div 
+                    a.button.gold.border-1px-black.margin-10px.padding-10px(href=`/ucs/${uc._id}/anuncios/add`) Novo Anúncio
+            .scroll-table
+                table.w3-table-all
+                    thead 
+                        tr 
+                            th Anúncios
+                    tbody
+                        each a in uc.anuncios
+                            tr 
+                                td
+                                    .flexbox.flex-grow.space-between
+                                        a.w3-container.no-text-decoration.flexbox.flex-column.flex-grow(href=`/ucs/${uc._id}/anuncios/${a._id}`)
+                                            h1=a.titulo
+                                            h4=new Date(a.data).toLocaleDateString([], { hour: "2-digit", minute: "2-digit" })
+                                
+                                        if producer || admin
+                                            .w3-container
+                                                a.w3-button(href=`/ucs/${uc._id}/anuncios/delete/${a._id}`) Remover Anuncio

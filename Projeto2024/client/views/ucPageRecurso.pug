@@ -1,0 +1,37 @@
+extends layout
+
+block head
+    link(rel='stylesheet', href='/stylesheets/ucPageRecurso.css')
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/resources`) Voltar
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Recurso
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+
+    .w3-container.flexbox.flex-grow.flex-column.align-center.justify-center
+        if renderScratch && resource.isScratch
+            .w3-container.w3-margin.w3-padding.white-smoke(style="user-select: none;" id=`embed-${resource._id}-meta`) Powered by 
+                a(href="https://scratch.mit.edu" target="_blank") Scratch
+            
+            .w3-container.w3-margin.w3-padding.canvas-parent-size(style="user-select: none;" id=`embed-${resource._id}` onLoad=`loadResource("${id}", "${resource._id}")`)
+        else if renderPDF && resource.isPdf
+            .flex.flex-grow.w3-margin.w3-padding
+                iframe.pdf(src=`/pdf.js/web/viewer.html?file=/static/${id}/${resource._id}`, frameborder="0" style="width: 100%; heigth:100%;") 
+        else if renderFlash && resource.isFlash
+            .w3-container.w3-margin.w3-padding.canvas-parent-size(style="user-select: none;" id=`embed-${resource._id}`)
+        else
+            h2 O recurso indicado não pode ser visualizado. 
+
+    if renderScratch && resource.isScratch
+        script(src="/javascripts/scratch-embed.js")
+        script(src="/javascripts/scratch-embed-resource.js")
+        script=`createScratchEmbed('${id}', '${resource._id}')`
+    else if renderFlash && resource.isFlash
+        script(src="/javascripts/ruffle-embed.js")
+        script(src="/javascripts/ruffle-embed-resource.js")
+        script=`createRuffleEmbed('${id}', '${resource._id}')`

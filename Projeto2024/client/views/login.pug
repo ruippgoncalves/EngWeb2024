@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    .w3-row.flexbox
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+        header.w3-half.flexbox.justify-center.align-center.gold
+            h1.white-smoke Login
+
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+    if warning != null 
+        .w3-container
+            .w3-panel.w3-red
+                h3 Warning!
+                p=warning
+                
+    form.w3-container.w3-margin(method="POST" id="loginForm")
+        fieldset
+            .w3-margin.w3-padding
+                label.white-smoke Email
+                input.w3-input.w3-round(type="text" placeholder="Email" name="email" required)
+            .w3-margin.w3-padding
+                label.white-smoke Password
+                input.w3-input.w3-round(type="password" placeholder="Password" name="password" required)  
+
+        br
+        footer.flexbox.space-between.align-center.flex-grow
+            div 
+            .flexbox
+                button.bg-white-smoke.button.border-1px-black.margin-10px.padding-10px(type="submit") Login
+                if process.env.DISABLE_REGISTER == 'false'
+                    a.bg-white-smoke.border-radius-10px.margin-10px.padding-10px.border-1px-black(href=`/register`) Criar Conta
+                
+                a.bg-white-smoke.border-radius-10px.margin-10px.padding-10px.border-1px-black(href=`/changepassword`) Recuperar Conta

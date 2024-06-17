@@ -1,0 +1,31 @@
+extends layout
+
+block head 
+    link(rel="stylesheet", href="/stylesheets/features.css")
+
+block content
+    .navbar
+        .leftNavbar.flexbox.space-evenly.align-center.full-height-div.flex-change-row-column
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Definições do site
+
+        .rightNavbar.flexbox.space-evenly.align-center.full-height-div.flex-change-row-column
+
+    form.w3-container(method="POST")
+        fieldset 
+            each feature in features
+                .w3-container.w3-margin.w3-padding
+                    if feature.type == 'String'
+                        label.white-smoke(for=feature.feature)=feature.desc
+                        input.w3-input.w3-round(type="text" id=feature.feature name=feature.feature value=feature.value)
+                    else if feature.type == 'Boolean'
+                        .flexbox
+                            label.white-smoke(for=feature.feature)=feature.desc
+                            input.margin-left-16px.w3-round(type="checkbox" id=feature.feature name=feature.feature checked=(feature.value == 'true'))
+        
+        .flexbox.space-between.align-center 
+            div
+            .flexbox
+                button.button.border-1px-black.margin-10px.padding-10px.dark-blue(type="submit") Guardar
+                a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href='/ucs') Voltar

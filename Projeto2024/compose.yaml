@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mongo:7.0.11
+    container_name: mongoDB
+    restart: always
+    expose:
+      - "27017"
+
+  meili:
+    image: getmeili/meilisearch:v1.8.1
+    container_name: searchDB
+    restart: always
+    expose:
+      - "7700"
+    environment:
+      - MEILI_MASTER_KEY=aSampleMasterKey
+
+  server:
+    build: server
+    container_name: server
+    links:
+      - db
+      - meili
+    expose:
+      - "3000"
+    environment:
+      - MONGO_DB=mongodb://mongoDB:27017/sites
+      - MEILI_DB=http://searchDB:7700
+      - MEILI_MASTER_KEY=aSampleMasterKey
+
+  client:
+    build : client
+    container_name: client
+    links:
+      - server
+    ports:
+      - "5000:5000"
+    environment:
+      - DATA_API=http://server:3000
+      - CLIENT_URL=http://localhost:5000

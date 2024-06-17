@@ -1,0 +1,44 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "leftNavbar middleNavbar rightNavbar";
+}
+
+.leftNavbar {
+    grid-area: leftNavbar;
+}
+
+.middleNavbar {
+    grid-area: middleNavbar;
+}
+
+.rightNavbar {
+    grid-area: rightNavbar;
+}
+
+.text-max-width{
+    max-width: 100%;
+}
+
+.word-wrap{
+    overflow-wrap: break-word;
+}
+
+.card{
+    width: 60%;
+    min-width: 350px;
+    color: #fbfbfb;
+    background: #121212;
+    border-radius: 10px;
+}
+
+@media screen and (width < 1000px) {
+    .navbar {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "leftNavbar   rightNavbar"
+            "middleNavbar middleNavbar";
+    }
+}

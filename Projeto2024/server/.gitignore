@@ -1,0 +1,6 @@
+.idea/
+node_modules
+resources/*
+!resources/.gitkeep
+!resources/manifest.xsd
+!resources/complete-manifest.xsd

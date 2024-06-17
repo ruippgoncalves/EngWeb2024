@@ -1,0 +1,31 @@
+extends layout
+
+block head 
+    link(rel='stylesheet', href='/stylesheets/ucUserPromote.css')
+    link(rel='stylesheet', href='/stylesheets/userCard.css')
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href='/ucs') Voltar
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Utilizadores
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+
+    .flexbox-flex-grow.justify-center.align-center.w3-margin.w3-padding
+        input.width-90.w3-half.w3-margin.w3-input.w3-round.w3-border(placeholder="Pesquisar" type="text" name="search" id="searchUsers")
+    
+    .w3-container
+        .container(id="user-list")
+            each user, idx in users
+                if user.nivel === 1
+                    .card(id=`card-${user._id}`)
+                        .box
+                            .content
+                                h3.word-break #{user.nome} (#{user.email})
+                                p=user.filiacao
+                                a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/admin/promote/${user._id}`) Promover
+
+    script(src="/javascripts/searchUsers.js")

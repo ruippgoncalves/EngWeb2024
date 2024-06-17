@@ -1,0 +1,44 @@
+extends layout
+
+block content 
+    header.w3-container.gold 
+        h1 Configuração Inicial
+
+    if error
+        .w3-container
+            .w3-panel.w3-red
+                h3 Ocorreu um erro! Tente novamente!
+
+    if warning != null 
+        .w3-container
+            .w3-panel.w3-yellow
+                h3 Warning!
+                p=warning
+
+    form.w3-container(method="POST" id="registoAdmin" enctype="multipart/form-data")
+        fieldset.w3-container.w3-margin
+            legend.white-smoke Configuração
+            .w3-margin.w3-paddin
+                label.white-smoke Nome do Administrador 
+                input.w3-input.w3-round(type="text" name="nome" required)
+            .w3-margin.w3-paddin
+                label.white-smoke Nome do Site
+                input.w3-input.w3-round(type="text" name="siteName" required)
+            .w3-margin.w3-paddin
+                label.white-smoke Logotipo (em formato JPG)
+                input.w3-input.w3-round(type="file" accept="image/jpeg" name="logo" required)
+            .w3-margin.w3-paddin
+                label.white-smoke Email do Administrador
+                input.w3-input.w3-round(type="text" name="email" required)
+            .w3-margin.w3-paddin
+                label.white-smoke Password
+                input.w3-input.w3-round(type="password" name="password" required)
+            .w3-margin.w3-paddin
+                label.white-smoke Confirmar password
+                input.w3-input.w3-round(type="password" name="password2" required)
+
+        b
+        .w3-container.w3-margin
+            .flexbox.flex-grow.space-between
+                div
+                button.button.text-align-center.border-1px-black.w3-round.gold(type="submit") Registar

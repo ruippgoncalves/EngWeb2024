@@ -1,0 +1,46 @@
+extends layout
+
+block head 
+    link(rel='stylesheet', href='/stylesheets/ucPageAnuncio.css')
+    link(rel='stylesheet', href='/stylesheets/dropdown.css')
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs`) Voltar
+
+        header.middleNavbar.flexbox.flex-column.justify-center.align-center
+            h1.white-smoke Anúncio
+            a.no-text-decoration(href=`/ucs/${id}/feed/rss`)
+                p.white-smoke Using Feed RSS
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/docentes`) Docentes
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/aulas`) Aulas
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/resources`) Conteúdo
+                    if producer || admin
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/users`) Inscritos
+            
+    .w3-container
+        .flexbox.flex-grow.justify-center.align-center
+            .card.w3-card-4.w3-margin
+                .w3-container.text-max-width
+                    p.word-wrap
+                        b Titulo:
+                        |  #{anuncio.titulo}
+
+                    p.word-wrap
+                        b Data:
+                        |  #{anuncio.data}
+
+                    p.word-wrap
+                        b Descrição:
+                    
+                    .margin-vertical-16px.word-wrap=anuncio.descricao
+
+                

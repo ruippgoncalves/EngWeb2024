@@ -1,0 +1,49 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "leftNavbar middleNavbar rightNavbar";
+}
+
+.leftNavbar {
+    grid-area: leftNavbar;
+}
+
+.middleNavbar {
+    grid-area: middleNavbar;
+}
+
+.rightNavbar {
+    grid-area: rightNavbar;
+}
+
+.text-max-width-100 {
+    max-width: 100% !important;
+}
+
+.text-max-width {
+    max-width: calc(100% - 200px) !important;
+}
+
+.width-200px {
+    max-width: 200px;
+    min-width: 200px;
+}
+
+.word-wrap {
+    overflow-wrap: break-word !important;
+}
+
+.width-90 {
+    min-width: 90% !important;
+}
+
+@media screen and (width < 800px) {
+    .navbar {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "leftNavbar"
+            "middleNavbar";
+    }
+}

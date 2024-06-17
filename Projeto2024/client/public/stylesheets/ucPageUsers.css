@@ -1,0 +1,46 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "leftNavbar middleNavbar rightNavbar";
+}
+
+.leftNavbar {
+    grid-area: leftNavbar;
+}
+
+.middleNavbar {
+    grid-area: middleNavbar;
+}
+
+.rightNavbar {
+    grid-area: rightNavbar;
+}
+
+.text-max-width {
+    max-width: calc(100% - 200px) !important;
+    min-width: calc(100% - 200px) !important;
+}
+
+.width-200px {
+    max-width: 200px;
+    min-width: 200px;
+}
+
+.word-wrap {
+    overflow-wrap: break-word !important;
+}
+
+.max-width-100 {
+    max-width: 100% !important;
+}
+
+@media screen and (width < 1000px) {
+    .navbar {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "leftNavbar   rightNavbar"
+            "middleNavbar middleNavbar";
+    }
+}

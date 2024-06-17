@@ -1,0 +1,21 @@
+extends layout
+
+block head 
+    link(rel="stylesheet", href="/stylesheets/ucPageEnroll.css")
+
+block content
+    .navbar
+        header.letfNavbar.flexbox.justify-center.align-center.gold
+            h1.white-smoke Inscrever numa UC
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div
+            .flexbox.justify-items.align-center.flex-grow.w3-margin.w3-padding
+                div
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/`) Voltar
+
+    form.w3-container.w3-margin.w3-padding(method="POST")
+        .flexbox.flex-grow.space-between
+            div
+            button.button.border-1px-black.margin-10px.padding-10px(type="submit" id="submit") Inscrever
+        
+        input.w3-input.w3-round.w3-border(type="text" name=`ucCode` placeholder="Indique o código da UC")

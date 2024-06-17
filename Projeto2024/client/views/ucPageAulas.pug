@@ -1,0 +1,43 @@
+extends layout
+
+block head 
+    link(rel='stylesheet', href='/stylesheets/ucPageAulas.css')
+    link(rel='stylesheet', href='/stylesheets/dropdown.css')
+    link(rel='stylesheet', href='/stylesheets/aulaRecursoCard.css')
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}`) UC
+
+        header.middleNavbar.flexbox.flex-column.justify-center.align-center
+            h1.white-smoke Aulas
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/docentes`) Docentes
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/resources`) Conteúdo
+                    if producer || admin
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/users`) Inscritos
+
+    if producer || admin
+        .flexbox.flex-grow.space-between.w3-margin.w3-padding
+            div
+            a.button.gold.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/aulas/add`) +
+
+    .w3-container
+        each a in aulas
+            .w3-margin
+                .card.text-max-width
+                    p.word-wrap.card-header #{a.data} (#{a.tipo})
+                    .word-wrap !{a.sumario}
+                    if producer || admin
+                        .min-width-340px.flexbox.flex-grow.space-between 
+                            .flexbox.flex-grow 
+                            .flexbox.align-start
+                                a.button.not-bottom-margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/aulas/update/${a._id}`) Atualizar
+                                a.button.not-bottom-margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/aulas/delete/${a._id}`) Remover

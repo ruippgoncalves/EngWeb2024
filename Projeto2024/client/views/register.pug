@@ -1,0 +1,41 @@
+extends layout 
+
+block content
+    .w3-row.flexbox
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+        header.w3-half.flexbox.justify-center.align-center.gold
+            h1.white-smoke Registar nova conta
+
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+    if warning != null 
+        .w3-container
+            .w3-panel.w3-yellow
+                h3 Warning!
+                p=warning
+    
+    form.w3-container.w3-margin(method="POST" id="registerForm")
+        fieldset.white-smoke Criar conta
+            .w3-margin.w3-padding
+                label.white-smoke Nome
+                input.w3-input.w3-round(type="text" name="nome" placeholder="Nome" maxlength="40" required)
+            .w3-margin.w3-padding
+                label.white-smoke Email
+                input.w3-input.w3-round(type="text" name="email" placeholder="Email" maxlength="40" required)
+            .w3-margin.w3-padding
+                label.white-smoke Password
+                input.w3-input.w3-round(type="password" name="password" placeholder="Password" required)
+            .w3-margin.w3-padding
+                label.white-smoke Confirmar password
+                input.w3-input.w3-round(type="password" name="password2" placeholder="Confirmar password" required)
+            .flexbox.flex-column.w3-margin.w3-padding
+                label.white-smoke Filiação
+                input.w3-input.w3-round(type="text" name="filiacao" placeholder="Filiação" required)
+
+        .w3-container.w3-margin
+            .flexbox.space-between 
+                div
+                .flexbox
+                    button.button.margin-10px.padding-10px.border-1px-black.gold(type="submit") Registar
+                    a.border-radius-10px.button.margin-10px.padding-10px.border-1px-black(href=`/`) Voltar

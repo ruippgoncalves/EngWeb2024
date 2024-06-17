@@ -1,0 +1,43 @@
+extends layout
+
+block head 
+    link(rel='stylesheet', href='/stylesheets/ucPageAnuncios.css')
+
+block content
+    .navbar
+        header.leftNavbar.flexbox.justify-center.align-center.gold
+            h1 Anúncios
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div
+            .flexbox.space-evenly.align-center.flex-grow
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}`) UC
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/docentes`) Docentes
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/aulas`) Aulas
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/resources`) Conteúdo
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/feed/rss`) Feed RSS
+                if producer || admin
+                    a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/users`) Inscritos
+
+    .flexbox.flex-grow.space-between
+        div
+        a.button.gold.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/anuncio/add`) +
+
+    .w3-container
+        each a in anuncios 
+            .w3-card-4.w3-margin
+                .flexbox.flex-grow.space-between
+                    .w3-container
+                        p
+                            b Titulo:
+                            |  #{a.titulo}
+
+                        p
+                            b Data:
+                            |  #{a.data}
+
+                        p
+                            b Descrição:
+                            |  !{a.descricao}
+
+                    .w3-container
+                        a.w3-button(href=`/ucs/${id}/anuncios/delete/${a._id}`) Remover Anuncio

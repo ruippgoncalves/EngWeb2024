@@ -1,0 +1,46 @@
+extends layout
+    
+block head
+    link(rel="stylesheet", href="/stylesheets/easymde.min.css")
+    script(src="/javascripts/easymde.min.js")
+    link(rel="stylesheet", href="/stylesheets/ucPageRecursosAdd.css")
+    link(rel="stylesheet", href="/stylesheets/dropdown.css")
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}`) UC
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Adicionar novo recurso
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/docentes`) Docentes
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/aulas`) Aulas
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/users`) Inscritos
+
+    form.w3-container.w3-margin.w3-padding(method="POST" enctype="multipart/form-data" id="form")
+        .flexbox.flex-grow.space-between
+            div
+            .w3-container
+                button.button.border-1px-black.margin-10px.padding-10px(type="submit" id="submit") Concluir
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/resources`) Cancelar
+        .w3-container(id="recursos")
+            fieldset.w3-margin.w3-padding(id="recurso1")
+                label.white-smoke(for="titulo") Titulo:
+                input.w3-input.w3-round.w3-border(type="text" name="titulo" required)
+                label.white-smoke(for="ficheiro") File:
+                input.white-smoke.w3-input.w3-round.w3-border(type="file" name="ficheiro" required)
+                label.white-smoke(for="descricao") Descriçao:
+                input(type="hidden" id="descricao1" name="descricao" required)                
+
+    script.
+        var easyMDE = new EasyMDE({ element: document.getElementById('descricao1') });
+        document.getElementById('form').addEventListener('submit', function(e) {
+            document.getElementById('descricao1').value = easyMDE.value();
+        });

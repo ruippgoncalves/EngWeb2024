@@ -1,0 +1,45 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "rightNavbar middleNavbar leftNavbar";
+}
+
+.leftNavbar {
+    grid-area: leftNavbar;
+    display: flexbox;
+    justify-content: flex-end;
+}
+
+.middleNavbar {
+    grid-area: middleNavbar;
+}
+
+.rightNavbar {
+    grid-area: rightNavbar;
+}
+
+@media screen and (width < 900px) {
+    .navbar {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "middleNavbar leftNavbar";
+    }
+}
+
+@media screen and (width < 750px) {
+    .navbar {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "leftNavbar"
+            "middleNavbar";
+    }
+
+    .leftNavbar {
+        grid-area: leftNavbar;
+        display: flexbox;
+        justify-content: center;
+    }
+}

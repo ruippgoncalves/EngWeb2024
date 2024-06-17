@@ -1,0 +1,65 @@
+extends layout
+
+block head 
+    link(rel='stylesheet', href='/stylesheets/ucList.css')
+    link(rel='stylesheet', href='/stylesheets/dropdown.css')
+    link(rel='stylesheet', href='/stylesheets/ucListCards.css')
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href='/logout') Log Out
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Unidades Curriculares
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    if admin
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href='/features') Definições do Site
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href='/admin/promote') Promover Utilizadores
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href='/sip/import/admin') Importar Sistema
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href='/sip/export/admin') Exportar Sistema
+                    if admin || producer
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href='/sip/import') Importar UC
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href='/sip/export') Exportar UC
+                    if !admin
+                        a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/enroll`) Inscrever UC
+
+    if warning != null
+        .w3-container
+            .w3-panel.w3-yellow
+                h3 Warning!
+                p=warning
+
+    .flexbox.justify-center.w3-margin.w3-padding
+        input.w3-half.w3-margin.w3-input.w3-round.w3-border(placeholder="Pesquisar" type="text" name="search" id="searchbar")
+
+    if producer || admin
+        .flexbox.flex-grow.space-between.w3-margin
+            div 
+            a.button.border-1px-black.margin-10px.padding-10px(href=`/ucs/add`) +
+
+    .ag-format-container
+        .ag-courses_box(id="ucs-table")
+            each uc in ucs
+                li.ag-courses_item(id=`uc-${uc._id}`)
+                    .ag-courses-item_link
+                        a(href=`/ucs/${uc._id}`)
+                            .ag-courses-item_bg
+
+                            .ag-courses-item_title=uc._id
+                            .ag-courses-item_date-box=uc.titulo
+                    .flexbox
+                        if uc.isProducer
+                            .flexbox.flex-grow.space-between.align-center
+                                div 
+                                .flexbox
+                                    a.button.gold.border-1px-black.margin-10px.padding-10px(href=`/ucs/update/${uc._id}`) Atualizar
+                                    a.button.gold.border-1px-black.margin-10px.padding-10px(href=`/ucs/delete/${uc._id}`) Remover
+
+    script(src="/javascripts/search.js")

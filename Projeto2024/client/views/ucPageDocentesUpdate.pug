@@ -1,0 +1,47 @@
+extends layout
+
+block head 
+    link(rel='stylesheet', href='/stylesheets/ucPageDocentes.css')
+    link(rel='stylesheet', href='/stylesheets/docenteCard.css')
+    link(rel='stylesheet', href='/stylesheets/dropdown.css')
+
+block content
+    
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}`) UC
+
+        header.middleNavbar.flexbox.justify-center.align-center
+            h1.white-smoke Atualizar docentes
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/aulas`) Aulas
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/resources`) Conteúdo
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/users`) Inscritos
+
+    form.width-100.w3-container.w3-margin.w3-padding(method="POST" enctype="multipart/form-data" id="form")
+        .flexbox.flex-grow.space-between
+            div
+            .flexbox
+                button.button.border-1px-black.margin-10px.padding-10px(type="submit" id="submit") Concluir
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/docentes`) Cancelar
+        .w3-container(id="docentes")
+            fieldset.w3-margin.w3-padding(id="docente1")
+                label.white-smoke(for="nome") Nome:
+                input.w3-input.w3-round.w3-border(type="text" name="nome" value=`${docente.nome}` required autofocus)
+                label.white-smoke(for="foto") Foto:
+                input.white-smoke.w3-input.w3-round.w3-border(type="file" name="foto" accept="image/*" required)
+                label.white-smoke(for="categoria") Categoria:
+                input.w3-input.w3-round.w3-border(type="text" name="categoria" value=`${docente.categoria}` required)
+                label.white-smoke(for="filiacao") Filiação:
+                input.w3-input.w3-round.w3-border(type="text" name="filiacao" value=`${docente.filiacao}` required)
+                label.white-smoke(for="email") Email:
+                input.w3-input.w3-round.w3-border(type="text" name="email" value=`${docente.email}` required)
+                label.white-smoke(for="webpage") Web Page:
+                input.w3-input.w3-round.w3-border(type="text" name="webpage" value=`${docente.webpage}` required)
+    

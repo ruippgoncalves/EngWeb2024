@@ -1,0 +1,40 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "leftNavbar middleNavbar rightNavbar";
+}
+
+.leftNavbar {
+    grid-area: leftNavbar;
+}
+
+.middleNavbar {
+    grid-area: middleNavbar;
+}
+
+.rightNavbar {
+    grid-area: rightNavbar;
+}
+
+.canvas-parent-size, .canvas-parent-size * {
+    width: calc(min(90vw, 65vh) * 1.33) !important;
+    height: min(90vw, 65vh) !important;
+}
+
+.pdf {
+    width: 90vw !important;
+    height: 80vh !important;
+    object-fit: cover !important;
+}
+
+@media screen and (width < 1000px) {
+    .navbar{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+            "leftNavbar"
+            "middleNavbar";
+    }
+}

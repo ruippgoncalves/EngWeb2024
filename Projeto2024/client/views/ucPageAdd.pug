@@ -1,0 +1,76 @@
+extends layout
+
+block content
+    .w3-row.flexbox
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+        header.w3-half.flexbox.justify-center.align-center.gold
+            h1.white-smoke Adicionar nova UC
+
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+    if warning != null
+        .w3-container
+            .w3-panel.w3-yellow
+                h3 Warning!
+                p=warning
+
+    form.w3-container(method="POST")
+        .flexbox.flex-grow.space-between
+            div
+            .flexbox
+                button.button.border-1px-black.margin-10px.padding-10px(type="submit" id="submit") Concluir
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs`) Cancelar
+
+        .w3-container
+            fieldset.w3-margin.w3-padding.white-smoke Identificação da UC
+                .w3-container.w3-margin.w3-padding
+                    .w3-container(id="identificacao")
+                        label.white-smoke.w3-margin(for="sigla") Sigla:
+                        input.w3-margin.w3-input.w3-round.w3-border(type="text" name="sigla")
+                        label.white-smoke.w3-margin(for="titulo") Título:
+                        input.w3-margin.w3-input.w3-round.w3-border(type="text" name="titulo")
+            
+            fieldset.w3-margin.w3-padding.white-smoke Datas Importantes
+                .w3-container
+                    .w3-container.w3-margin(id="datas")
+                        .flexbox.flex-grow.space-between
+                            .flexbox
+                                button.button.border-1px-black.margin-10px.padding-10px(id="newData") +
+                                button.button.border-1px-black.margin-10px.padding-10px(id="removeData") -
+                        div(id="data1")
+                            label.white-smoke.w3-margin(for="dataNome1") Nome:
+                            input.w3-margin.w3-input.w3-round.w3-border(type="text" name="dataNome1")
+                            label.white-smoke.w3-margin(for="dataDia1") Dia:
+                            input.w3-margin.w3-input.w3-round.w3-border(type="text" name="dataDia1")
+            
+            fieldset.w3-margin.w3-padding.white-smoke Horários
+                .w3-container(id="horários")
+                    .w3-container.w3-margin(id="teoricas")
+                        .flexbox.flex-grow.space-between
+                            .flexbox
+                                button.button.border-1px-black.margin-10px.padding-10px(id="newHorarioTeorico") +
+                                button.button.border-1px-black.margin-10px.padding-10px(id="removeHorarioTeorico") -
+                        .w3-margin.white-smoke Teóricas:
+                        input.w3-margin.w3-input.w3-round.w3-border(type="text" name="horarioTeorico1" id="horarioTeorico1")
+
+                    .w3-container.w3-margin(id="praticas")
+                        .flexbox.flex-grow.space-between
+                            .flexbox
+                                button.button.border-1px-black.margin-10px.padding-10px(id="newHorarioPratico") +
+                                button.button.border-1px-black.margin-10px.padding-10px(id="removeHorarioPratico") -
+                        .w3-margin.white-smoke Práticas:
+                        input.w3-margin.w3-input.w3-round.w3-border(type="text" name="horarioPratico1" id="horarioPratico1")
+
+            fieldset.w3-margin.w3-padding.white-smoke Avaliações
+                .w3-container
+                    .w3-container.w3-margin.w3-padding(id="avaliacoes")
+                        .flexbox.flex-grow.space-between
+                            div
+                            .flexbox
+                                button.button.border-1px-black.margin-10px.padding-10px(id="newAvaliacao") +
+                                button.button.border-1px-black.margin-10px.padding-10px(id="removeAvaliacao") -
+                        input.w3-margin.w3-input.w3-round.w3-border(type="text" name="avaliacao1" id="avaliacao1")
+
+    script(src="/javascripts/jquery-3.7.1.min.js")
+    script(src="/javascripts/addUc.js")

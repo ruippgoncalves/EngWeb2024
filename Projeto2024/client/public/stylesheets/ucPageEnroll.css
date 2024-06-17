@@ -1,0 +1,33 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "leftNavbar rightNavbar";
+}
+
+.leftNavbar {
+    grid-area: leftNavbar;
+}
+
+.rightNavbar {
+    grid-area: rightNavbar;
+}
+
+.justify-items {
+    justify-content: space-between;
+}
+
+@media screen and (width < 1000px) {
+    .navbar {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+            "rightNavbar"
+            "leftNavbar";
+    }
+
+    .justify-items {
+        justify-content: center;
+    }
+}

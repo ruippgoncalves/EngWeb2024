@@ -1,0 +1,46 @@
+extends layout
+
+block head
+    link(rel="stylesheet", href="/stylesheets/easymde.min.css")
+    script(src="/javascripts/easymde.min.js")
+    link(rel="stylesheet", href="/stylesheets/ucPageAulasUpdate.css")
+    link(rel="stylesheet", href="/stylesheets/dropdown.css")
+
+block content
+    .navbar
+        .leftNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            a.button.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}`) UC
+
+        header.middleNavbar.flexbox.flex-column.justify-center.align-center
+            h1.white-smoke Adicionar nova aula
+
+        .rightNavbar.flexbox.justify-center.align-center.full-height-div.flex-change-row-column
+            .sec-center
+                input.dropdown(type="checkbox" id="dropdown" name="dropdown")
+                label.white-smoke.button.gold.border-1px-black.margin-10px.padding-10px(for="dropdown") Menu 
+                    
+                .section-dropdown
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/docentes`) Docentes
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/resources`) Conteúdo
+                    a.dropdown-a.bg-white-smoke.dark-blue.border-1px-black.margin-10px.padding-10px(href=`/ucs/${id}/users`) Inscritos
+
+    form.w3-container(method="POST" id="form")
+        .flexbox.flex-grow.space-between
+            div
+            .flexbox
+                button.button.border-1px-black.margin-10px.padding-10px(type="submit" id="submit") Concluir
+                a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs/${id}/aulas`) Cancelar
+        .w3-container(id="aulas")
+            fieldset.w3-margin.w3-padding(id="aula1")
+                label.white-smoke(for="tipo") Tipo:
+                input.w3-input.w3-round.w3-border(type="text" name="tipo" value=`${aula.tipo}` required autofocus)
+                label.white-smoke(for="data") Data:
+                input.w3-input.w3-round.w3-border(type="text" name="data" value=`${aula.data}` required)
+                label.white-smoke(for="sumario") Sumário:
+                input(type="hidden" id="sumario" name="sumario" value=`${aula.sumario}` required)
+
+    script.
+        var easyMDE = new EasyMDE({ element: document.getElementById('sumario') });
+        document.getElementById('form').addEventListener('submit', function(e) {
+            document.getElementById('sumario').value = easyMDE.value();
+        });

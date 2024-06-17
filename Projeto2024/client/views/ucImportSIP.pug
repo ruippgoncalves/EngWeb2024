@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    .w3-row.flexbox
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+        header.w3-half.flexbox.justify-center.align-center.gold
+            h1.white-smoke Importar SIP
+
+        .w3-quarter.flexbox.justify-center.align-center.full-height-div
+
+    if warning != null 
+        .w3-container
+            .w3-panel.w3-yellow
+                h3 Warning!
+                p=warning
+
+
+    .flexbox.space-evenly.align-center.full-height-div.w3-margin
+        form.w3-container.w3-padding(method='POST' action='/sip/import' enctype='multipart/form-data')
+            fieldset
+                label.white-smoke.w3-margin.w3-padding(for="sip") Selecione o SIP
+                br
+                input.white-smoke.w3-margin.w3-padding(type="file" name="sip" id="sip")
+            .flexbox.flex-grow.space-between 
+                div
+                .flexbox
+                    button.button.margin-10px.padding-10px.border-1px-black.gold(type="submit") Submeter
+                    a.button.margin-10px.padding-10px.border-1px-black(href=`/ucs`) Voltar
